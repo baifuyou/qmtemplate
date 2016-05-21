@@ -70,11 +70,11 @@ public abstract class QMTemplateAbstractImpl implements QMTemplate {
         if (obj instanceof Map) {
             return ((Map) obj).get(key);
         }
-        if (obj instanceof Object[] && key instanceof Integer) {
-            return ((Object[]) obj)[(Integer) key];
+        if (obj instanceof Object[] && key instanceof Long) {
+            return ((Object[]) obj)[((Long) key).intValue()];
         }
-        if (obj instanceof List && key instanceof Integer) {
-            return ((List) obj).get((Integer) key);
+        if (obj instanceof List && key instanceof Long) {
+            return ((List) obj).get(((Long) key).intValue());
         }
         if (obj instanceof Object && key instanceof String) {
             try {

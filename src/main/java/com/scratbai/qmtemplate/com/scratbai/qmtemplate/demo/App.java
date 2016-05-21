@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class App {
     public static void main(String[] args) {
-        String temp1 = "hello {world},\n \" \\\\''' {each name, gender in people}我是{name}, {gender}\n{/end}";
+        String temp1 = "hello, {world},{array[0]}\n \" \\\\''' {each name, gender in people}我是{name}, {gender}\n{/end}";
         String temp2 = "hello {world}, {((people.size() == 2.0) && false)}, {people.size()}";
         String temp3 = "this is a demo for each expr, {each name in names}{if !yes} {name} {else if false} xxxx  {else} yyyy{/end}{/end}";
         String temp4 = "this is a demo for each expr, {each index, name in names}{if yes}{index}, {name}{/end}{/end}";
         String temp5 = "this is a demo for each bean, {bean[\"hello\"]},\n{each key, end in bean} {key}, {end}\n{/end}";
         long startCompileTime = System.currentTimeMillis();
-        QMTemplate qmTemplate = QMTemplates.compileFromFile("/home/baifuyou/tmp/test.tem");
+        QMTemplate qmTemplate = QMTemplates.compileFromString(temp1);
         long endCompileTime = System.currentTimeMillis();
         System.out.println((endCompileTime - startCompileTime) + " ms");
 
@@ -36,6 +36,7 @@ public class App {
         params.put("names", names);
         params.put("bean", new DemoBean());
         params.put("yes", true);
+        params.put("array", new String[]{"new", "world"});
 
         System.out.println("render result1: ");
         String result = "";

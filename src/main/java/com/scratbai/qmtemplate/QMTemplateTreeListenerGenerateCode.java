@@ -95,14 +95,7 @@ public class QMTemplateTreeListenerGenerateCode extends QMTemplateParserBaseList
     public void exitOriginText(QMTemplateParser.OriginTextContext ctx) {
         String text = ctx.getText().replace("\\{", "{").replace("\\}", "}").replace("\\", "\\\\").replace("\n",
                 "\\n").replace("\"",
-                "\\\"").trim();
-        if (text.startsWith("\\n")) {
-            text = text.substring(2);
-        }
-        if (text.endsWith("\\n")) {
-            text = text.substring(0, text.length() - 2);
-        }
-        text = text.trim();
+                "\\\"");
         String code = String.format("%s.append(\"%s\");\n", RESULT_BUF_NAME, text);
         codes.put(ctx, code);
     }
